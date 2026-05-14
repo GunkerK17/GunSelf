@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "GunSelf",
+    "slug": "gunself",
+    "scheme": "gunself",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "assetBundlePatterns": ["**/*"],
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gunself.app"
+    },
+    "android": {
+      "package": "com.gunself.app"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

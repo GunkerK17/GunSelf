@@ -1,0 +1,33 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "types": [
+      "node"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@gunself/types": [
+        "../../packages/types/src/index.ts"
+      ],
+      "@gunself/utils": [
+        "../../packages/utils/src/index.ts"
+      ],
+      "@gunself/validation": [
+        "../../packages/validation/src/index.ts"
+      ],
+      "@gunself/services": [
+        "../../packages/services/src/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ]
+}

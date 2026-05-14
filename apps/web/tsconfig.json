@@ -1,0 +1,41 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@gunself/types": [
+        "../../packages/types/src/index.ts"
+      ],
+      "@gunself/utils": [
+        "../../packages/utils/src/index.ts"
+      ],
+      "@gunself/validation": [
+        "../../packages/validation/src/index.ts"
+      ],
+      "@gunself/services": [
+        "../../packages/services/src/index.ts"
+      ]
+    },
+    "incremental": true,
+    "jsx": "preserve",
+    "noEmit": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

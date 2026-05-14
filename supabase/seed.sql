@@ -1,0 +1,3 @@
+-- Seed data placeholder for GunSelf.
+-- Keep this file intentionally minimal for now.
+-- Add environment-specific seed statements when sample users are available.
