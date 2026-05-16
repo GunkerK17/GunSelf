@@ -26,6 +26,8 @@
     },
     "incremental": true,
     "jsx": "preserve",
+    "declaration": false,
+    "declarationMap": false,
     "noEmit": true,
     "isolatedModules": true
   },

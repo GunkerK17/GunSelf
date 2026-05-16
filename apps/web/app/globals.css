@@ -4,11 +4,763 @@
 
 :root {
   color-scheme: light;
+  --gs-cyan: #00a8d8;
+  --gs-cyan-soft: #2ac6eb;
+  --gs-gray: #585d63;
+  --gs-deep: #0a1020;
+  --gs-orange: #f28a24;
+  --gs-bg: #eef3f8;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: #f8fafc;
+  background:
+    radial-gradient(600px 420px at 12% 10%, rgba(42, 198, 235, 0.14), transparent 72%),
+    radial-gradient(500px 360px at 88% 16%, rgba(242, 138, 36, 0.12), transparent 70%),
+    linear-gradient(180deg, #f7fbff 0%, var(--gs-bg) 100%);
+  color: #111827;
+  font-family: var(--font-space), "Segoe UI", sans-serif;
+}
+
+@keyframes gsFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes gsPulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 24px 55px -28px rgba(0, 168, 216, 0.5);
+  }
+  50% {
+    box-shadow: 0 32px 70px -24px rgba(242, 138, 36, 0.42);
+  }
+}
+
+@keyframes gsShineSweep {
+  0% {
+    transform: translateX(-140%) skewX(-16deg);
+  }
+  100% {
+    transform: translateX(240%) skewX(-16deg);
+  }
+}
+
+@keyframes gsGlowShift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-1.5%, -1.2%, 0) scale(1.06);
+    filter: hue-rotate(12deg);
+  }
+}
+
+@keyframes gsGridDrift {
+  0% {
+    background-position:
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      160px 80px,
+      -120px -60px;
+  }
+}
+
+@keyframes gsOrbDriftLeft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(34px, -24px, 0) scale(1.08);
+  }
+}
+
+@keyframes gsOrbDriftRight {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-26px, 22px, 0) scale(1.1);
+  }
+}
+
+.gs-glass-card {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background:
+    linear-gradient(145deg, rgba(10, 16, 32, 0.86) 0%, rgba(18, 30, 58, 0.88) 100%);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 36px 80px -42px rgba(2, 10, 26, 0.9);
+}
+
+.gs-glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg, transparent 24%, rgba(255, 255, 255, 0.13) 36%, transparent 47%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gs-glass-card:hover::after {
+  opacity: 1;
+  animation: gsShineSweep 1.3s ease forwards;
+}
+
+.gs-float {
+  animation: gsFloat 6s ease-in-out infinite;
+}
+
+.gs-pulse-glow {
+  animation: gsPulseGlow 5s ease-in-out infinite;
+}
+
+@keyframes gsClientFloatSoft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes gsClientAuraShift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-1.2%, 1%, 0) scale(1.04);
+    filter: hue-rotate(10deg);
+  }
+}
+
+.gs-client-stage {
+  position: relative;
+  border: 1px solid rgba(248, 113, 113, 0.24);
+  background:
+    radial-gradient(130% 120% at 10% -8%, rgba(239, 68, 68, 0.18), transparent 56%),
+    linear-gradient(155deg, rgba(10, 13, 20, 0.92), rgba(15, 17, 27, 0.94));
+  box-shadow:
+    0 34px 70px -52px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(248, 113, 113, 0.2);
+  overflow: hidden;
+}
+
+.gs-client-stage::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background:
+    radial-gradient(52% 42% at 10% 12%, rgba(239, 68, 68, 0.18), transparent 70%),
+    radial-gradient(48% 36% at 86% 8%, rgba(59, 130, 246, 0.1), transparent 70%),
+    radial-gradient(44% 30% at 48% 90%, rgba(15, 23, 42, 0.16), transparent 75%);
+  animation: gsClientAuraShift 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.gs-client-panel {
+  position: relative;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 1rem;
+  background: linear-gradient(148deg, rgba(255, 255, 255, 0.96), rgba(246, 250, 255, 0.94));
+  box-shadow:
+    0 24px 44px -34px rgba(15, 23, 42, 0.52),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(8px);
+}
+
+.gs-client-panel-3d {
+  transform-style: preserve-3d;
+  transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+}
+
+.gs-client-panel-3d:hover {
+  transform: translateY(-3px) rotateX(1.8deg) rotateY(-1.8deg);
+  border-color: rgba(14, 165, 233, 0.4);
+  box-shadow:
+    0 30px 52px -30px rgba(2, 132, 199, 0.4),
+    0 14px 30px -24px rgba(242, 138, 36, 0.38);
+}
+
+.gs-client-kpi {
+  animation: gsClientFloatSoft 7s ease-in-out infinite;
+}
+
+.gs-client-hero {
+  position: relative;
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(110% 100% at 0% 0%, rgba(239, 68, 68, 0.26), transparent 62%),
+    radial-gradient(90% 80% at 100% 0%, rgba(59, 130, 246, 0.14), transparent 64%),
+    linear-gradient(152deg, rgba(11, 14, 20, 0.95), rgba(19, 19, 24, 0.95));
+  color: #f8fafc;
+  box-shadow:
+    0 28px 50px -34px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(248, 113, 113, 0.2);
+}
+
+.gs-client-gridline {
+  background-image: repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.12) 0 1px, transparent 1px 14px);
+}
+
+.gs-display {
+  font-family: var(--font-display), var(--font-space), sans-serif;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.gs-auth-bg {
+  background:
+    radial-gradient(900px 500px at -8% -10%, rgba(42, 198, 235, 0.26), transparent 62%),
+    radial-gradient(760px 420px at 112% 0%, rgba(242, 138, 36, 0.2), transparent 60%),
+    radial-gradient(680px 360px at 50% 102%, rgba(0, 168, 216, 0.17), transparent 62%),
+    linear-gradient(145deg, #040913 0%, #071229 44%, #0b1d3b 100%);
+}
+
+.gs-auth-layer-glow {
+  background:
+    radial-gradient(900px 520px at 8% 12%, rgba(248, 113, 113, 0.34), transparent 62%),
+    radial-gradient(700px 440px at 92% 18%, rgba(148, 163, 184, 0.28), transparent 60%),
+    radial-gradient(680px 420px at 58% 88%, rgba(239, 68, 68, 0.2), transparent 64%),
+    linear-gradient(145deg, #1a171b 0%, #232026 36%, #1b191f 100%);
+  animation: gsGlowShift 12s ease-in-out infinite;
+}
+
+.gs-auth-layer-grid {
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 16px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 16px);
+  animation: gsGridDrift 16s linear infinite;
+}
+
+.gs-auth-layer-vignette {
+  background: radial-gradient(120% 100% at 50% 50%, transparent 35%, rgba(3, 7, 18, 0.35) 100%);
+}
+
+.gs-auth-root {
+  background:
+    radial-gradient(70% 60% at 8% 8%, rgba(239, 68, 68, 0.2), transparent 68%),
+    radial-gradient(65% 60% at 96% 12%, rgba(148, 163, 184, 0.18), transparent 70%),
+    linear-gradient(145deg, #121113 0%, #18151a 45%, #1f1719 100%);
+}
+
+.gs-auth-shell {
+  box-shadow:
+    0 42px 100px -50px rgba(0, 0, 0, 0.85),
+    0 10px 24px -16px rgba(127, 29, 29, 0.45),
+    inset 0 1px 0 rgba(248, 113, 113, 0.2);
+}
+
+.gs-auth-panel {
+  background:
+    radial-gradient(100% 120% at 14% 0%, rgba(248, 113, 113, 0.4), transparent 52%),
+    linear-gradient(145deg, #4c1114 0%, #2a1114 45%, #180f13 100%);
+}
+
+.gs-auth-orb {
+  width: 420px;
+  height: 420px;
+  border-radius: 9999px;
+  filter: blur(72px);
+  opacity: 0.35;
+}
+
+.gs-auth-orb-left {
+  left: -140px;
+  top: 14%;
+  background: rgba(239, 68, 68, 0.72);
+  animation: gsOrbDriftLeft 13s ease-in-out infinite;
+}
+
+.gs-auth-orb-right {
+  right: -120px;
+  bottom: 8%;
+  background: rgba(148, 163, 184, 0.55);
+  animation: gsOrbDriftRight 14s ease-in-out infinite;
+}
+
+.gs-auth-input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(255, 255, 255, 0.92);
   color: #0f172a;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.gs-auth-input::placeholder {
+  color: #64748b;
+}
+
+.gs-auth-input:focus {
+  outline: none;
+  border-color: rgba(220, 38, 38, 0.5);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.14);
+  background: #fff;
+}
+
+.gs-auth-primary-btn {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(127, 29, 29, 0.4);
+  background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  box-shadow:
+    0 14px 24px -14px rgba(220, 38, 38, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease;
+}
+
+.gs-auth-primary-btn:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.06) brightness(1.03);
+}
+
+.gs-auth-primary-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.gs-auth-secondary-btn {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(255, 255, 255, 0.95);
+  color: #1e293b;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+
+.gs-auth-secondary-btn:hover {
+  transform: translateY(-1px);
+  background: #fff;
+  border-color: rgba(220, 38, 38, 0.36);
+}
+
+.gs-logo-card {
+  box-shadow:
+    0 26px 52px -28px rgba(2, 8, 23, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  transform-style: preserve-3d;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.gs-logo-card:hover {
+  transform: translateY(-4px) rotateX(5deg) rotateY(-4deg);
+  box-shadow:
+    0 34px 60px -26px rgba(2, 8, 23, 0.92),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+@keyframes gsRingSpin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) scale(1.06);
+  }
+}
+
+@keyframes gsPanelPulse {
+  0%,
+  100% {
+    box-shadow: 0 26px 62px -34px rgba(34, 211, 238, 0.55);
+  }
+  50% {
+    box-shadow: 0 34px 74px -28px rgba(99, 102, 241, 0.55);
+  }
+}
+
+@keyframes gsPanelWave {
+  0%,
+  100% {
+    transform: perspective(900px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: perspective(900px) rotateX(2.2deg) rotateY(-2deg);
+  }
+  50% {
+    transform: perspective(900px) rotateX(-1.4deg) rotateY(2.4deg);
+  }
+  75% {
+    transform: perspective(900px) rotateX(1deg) rotateY(-1deg);
+  }
+}
+
+@keyframes gsCubeFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) rotate(8deg);
+  }
+}
+
+@keyframes gsBeamScan {
+  0% {
+    transform: translateX(-130%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateX(180%);
+    opacity: 0;
+  }
+}
+
+@keyframes gsAuroraFlow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-2%, 1.5%, 0) scale(1.08);
+    filter: hue-rotate(18deg);
+  }
+}
+
+@keyframes gsButtonDepthPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 14px 22px -12px rgba(214, 82, 132, 0.44),
+      0 6px 12px -8px rgba(122, 44, 70, 0.36);
+  }
+  50% {
+    box-shadow:
+      0 16px 24px -10px rgba(214, 82, 132, 0.5),
+      0 8px 14px -8px rgba(122, 44, 70, 0.4);
+  }
+}
+
+@keyframes gsAdminCardPop {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.gs-admin-login-bg {
+  background:
+    radial-gradient(65% 70% at 8% 8%, rgba(226, 111, 78, 0.2), transparent 70%),
+    radial-gradient(60% 60% at 92% 12%, rgba(214, 82, 132, 0.2), transparent 70%),
+    linear-gradient(140deg, #1a1114 0%, #221419 35%, #23151d 100%);
+}
+
+.gs-admin-noise {
+  background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 14px);
+}
+
+.gs-admin-aurora {
+  background:
+    radial-gradient(50% 50% at 18% 24%, rgba(239, 68, 68, 0.18), transparent 70%),
+    radial-gradient(50% 50% at 82% 18%, rgba(148, 163, 184, 0.2), transparent 72%),
+    radial-gradient(42% 42% at 54% 78%, rgba(239, 68, 68, 0.16), transparent 74%);
+  animation: gsAuroraFlow 14s ease-in-out infinite;
+}
+
+.gs-admin-scanlines {
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size:
+    100% 6px,
+    6px 100%;
+}
+
+.gs-admin-orb {
+  width: 360px;
+  height: 360px;
+  border-radius: 9999px;
+  filter: blur(72px);
+  opacity: 0.45;
+}
+
+.gs-admin-orb-cyan {
+  left: -90px;
+  top: 14%;
+  background: rgba(239, 68, 68, 0.45);
+  animation: gsOrbDriftLeft 12s ease-in-out infinite;
+}
+
+.gs-admin-orb-violet {
+  right: -110px;
+  bottom: 14%;
+  background: rgba(148, 163, 184, 0.4);
+  animation: gsOrbDriftRight 14s ease-in-out infinite;
+}
+
+.gs-admin-orb-emerald {
+  left: 44%;
+  bottom: -140px;
+  background: rgba(127, 29, 29, 0.35);
+  animation: gsOrbDriftLeft 16s ease-in-out infinite;
+}
+
+.gs-admin-panel {
+  background:
+    radial-gradient(95% 100% at 12% 10%, rgba(239, 68, 68, 0.26), transparent 58%),
+    linear-gradient(145deg, rgba(36, 11, 11, 0.88), rgba(15, 15, 15, 0.96));
+}
+
+.gs-admin-panel-3d {
+  transform-style: preserve-3d;
+  animation: gsPanelWave 9s ease-in-out infinite;
+}
+
+.gs-admin-panel-3d::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 32%, rgba(248, 113, 113, 0.24) 48%, transparent 62%);
+  animation: gsBeamScan 7.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.gs-admin-panel-card {
+  animation: gsPanelPulse 6s ease-in-out infinite;
+}
+
+.gs-admin-ring {
+  animation: gsRingSpin 16s linear infinite;
+}
+
+.gs-admin-floating-cube {
+  width: 70px;
+  height: 70px;
+  border-radius: 16px;
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  background: linear-gradient(145deg, rgba(239, 68, 68, 0.24), rgba(148, 163, 184, 0.2));
+  box-shadow:
+    0 24px 42px -24px rgba(239, 68, 68, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  animation: gsCubeFloat 5.5s ease-in-out infinite;
+}
+
+.gs-admin-cube-1 {
+  top: 14%;
+  left: 10%;
+  transform: rotate(-18deg);
+}
+
+.gs-admin-cube-2 {
+  bottom: 20%;
+  right: 12%;
+  width: 90px;
+  height: 90px;
+  transform: rotate(14deg);
+  animation-delay: 900ms;
+}
+
+.gs-admin-cube-3 {
+  bottom: 8%;
+  left: 18%;
+  width: 56px;
+  height: 56px;
+  transform: rotate(26deg);
+  animation-delay: 1500ms;
+}
+
+.gs-admin-module-chip {
+  box-shadow:
+    0 14px 30px -20px rgba(239, 68, 68, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transform: translateZ(0);
+  transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease;
+}
+
+.gs-admin-module-chip:hover {
+  transform: translateY(-3px) scale(1.03);
+  border-color: rgba(248, 113, 113, 0.7);
+  background: rgba(15, 23, 42, 0.82);
+}
+
+.gs-admin-floating-chip {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  background: rgba(15, 23, 42, 0.55);
+  box-shadow:
+    0 18px 30px -18px rgba(239, 68, 68, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  animation: gsCubeFloat 6.4s ease-in-out infinite;
+}
+
+.gs-admin-cta-btn {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  appearance: none;
+  letter-spacing: 0.01em;
+  transform: translateY(0);
+  transition:
+    transform 180ms ease,
+    filter 180ms ease,
+    box-shadow 220ms ease;
+  animation: none;
+  background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+  box-shadow:
+    0 14px 22px -12px rgba(220, 38, 38, 0.44),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.gs-admin-cta-btn:hover {
+  transform: translateY(-3px);
+  filter: saturate(1.1) brightness(1.04);
+  box-shadow: 0 16px 24px -10px rgba(220, 38, 38, 0.5);
+}
+
+.gs-admin-cta-btn:active {
+  transform: translateY(2px) scale(0.995);
+  box-shadow: 0 8px 14px -10px rgba(220, 38, 38, 0.42);
+}
+
+.gs-admin-ghost-btn {
+  box-shadow:
+    0 14px 24px -18px rgba(220, 38, 38, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.gs-admin-ghost-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(248, 113, 113, 0.55);
+}
+
+.gs-admin-tile {
+  position: relative;
+  transform-style: preserve-3d;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.gs-admin-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(120deg, transparent 25%, rgba(248, 113, 113, 0.2) 50%, transparent 75%);
+  transition: opacity 220ms ease;
+}
+
+.gs-admin-tile:hover {
+  transform: translateY(-5px) rotateX(2deg) rotateY(-2deg);
+  border-color: rgba(248, 113, 113, 0.45);
+  box-shadow: 0 24px 38px -30px rgba(15, 23, 42, 0.5);
+}
+
+.gs-admin-tile:hover::after {
+  opacity: 1;
+}
+
+.gs-admin-card-pop {
+  animation: gsAdminCardPop 520ms ease both;
+}
+
+.gs-admin-motion-off .gs-admin-card-pop,
+.gs-admin-motion-off .gs-admin-panel-3d,
+.gs-admin-motion-off .gs-admin-panel-card,
+.gs-admin-motion-off .gs-admin-ring,
+.gs-admin-motion-off .gs-admin-floating-cube,
+.gs-admin-motion-off .gs-auth-layer-glow,
+.gs-admin-motion-off .gs-auth-layer-grid,
+.gs-admin-motion-off .gs-auth-orb-left,
+.gs-admin-motion-off .gs-auth-orb-right {
+  animation: none !important;
+}
+
+.gs-admin-motion-off .gs-admin-tile,
+.gs-admin-motion-off .gs-admin-module-chip,
+.gs-admin-motion-off .gs-admin-ghost-btn,
+.gs-admin-motion-off .gs-admin-cta-btn {
+  transition: none !important;
+}
+
+.gs-admin-depth-off .gs-admin-tile:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.gs-admin-depth-off .gs-admin-tile::after {
+  display: none;
+}
+
+.gs-admin-depth-off .gs-admin-panel-3d {
+  animation: none;
+}
+
+.gs-admin-depth-off .gs-admin-floating-cube,
+.gs-admin-depth-off .gs-admin-floating-chip,
+.gs-admin-depth-off .gs-admin-ring {
+  display: none;
+}
+
+.gs-admin-depth-normal .gs-admin-tile:hover {
+  transform: translateY(-3px) rotateX(1deg) rotateY(-1deg);
+}
+
+.gs-admin-depth-pro .gs-admin-tile:hover {
+  transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) scale(1.01);
+  box-shadow:
+    0 30px 42px -28px rgba(248, 113, 113, 0.42),
+    0 16px 26px -22px rgba(15, 23, 42, 0.55);
+}
+
+.gs-admin-depth-pro .gs-admin-sidebar-link:hover {
+  transform: translateX(3px) translateY(-1px);
 }

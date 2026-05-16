@@ -12,6 +12,7 @@ GunSelf is a Personal Life Operating System monorepo for Web and Mobile apps wit
 ## Workspace Structure
 
 - `apps/web`: Next.js web app
+  - Includes user experience and `/admin` management module
 - `apps/mobile`: Expo mobile app
 - `packages/types`: shared database/domain types
 - `packages/utils`: shared utility functions
@@ -96,6 +97,7 @@ Apply schema in Supabase SQL editor (or Supabase CLI migration flow) before impl
 
 - Monorepo and package boundaries
 - Web app route placeholders (auth + dashboard modules)
+- Admin management route placeholders (`/admin/*`) with role guard
 - Mobile app route placeholders (auth + tabs)
 - Shared types/utils/validation/services packages
 - Supabase connection base on both Web and Mobile
@@ -110,3 +112,15 @@ Apply schema in Supabase SQL editor (or Supabase CLI migration flow) before impl
 - Payment/notifications
 - Store deployment setup
 - Production-ready final UI
+
+## Admin Access Setup
+
+Admin routes are protected by `profiles.role = 'admin'`.
+
+Promote a user to admin in Supabase SQL editor:
+
+```sql
+update public.profiles
+set role = 'admin'
+where id = '<auth_user_uuid>';
+```

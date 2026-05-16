@@ -26,22 +26,121 @@ export type Database = {
         Row: {
           id: string;
           display_name: string | null;
+          email: string | null;
+          phone: string | null;
           avatar_url: string | null;
           timezone: string | null;
+          role: "user" | "admin";
+          is_super_admin: boolean;
+          is_banned: boolean;
+          banned_at: string | null;
+          ban_reason: string | null;
+          is_archived: boolean;
+          archived_at: string | null;
+          archived_reason: string | null;
+          admin_modules: string[] | null;
           created_at: string;
         };
         Insert: {
           id: string;
           display_name?: string | null;
+          email?: string | null;
+          phone?: string | null;
           avatar_url?: string | null;
           timezone?: string | null;
+          role?: "user" | "admin";
+          is_super_admin?: boolean;
+          is_banned?: boolean;
+          banned_at?: string | null;
+          ban_reason?: string | null;
+          is_archived?: boolean;
+          archived_at?: string | null;
+          archived_reason?: string | null;
+          admin_modules?: string[] | null;
           created_at?: string;
         };
         Update: {
           id?: string;
           display_name?: string | null;
+          email?: string | null;
+          phone?: string | null;
           avatar_url?: string | null;
           timezone?: string | null;
+          role?: "user" | "admin";
+          is_super_admin?: boolean;
+          is_banned?: boolean;
+          banned_at?: string | null;
+          ban_reason?: string | null;
+          is_archived?: boolean;
+          archived_at?: string | null;
+          archived_reason?: string | null;
+          admin_modules?: string[] | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      announcements: {
+        Row: {
+          id: string;
+          title: string;
+          content: string;
+          is_published: boolean;
+          published_at: string | null;
+          created_by: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          title: string;
+          content: string;
+          is_published?: boolean;
+          published_at?: string | null;
+          created_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          title?: string;
+          content?: string;
+          is_published?: boolean;
+          published_at?: string | null;
+          created_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      admin_audit_logs: {
+        Row: {
+          id: string;
+          actor_user_id: string | null;
+          target_user_id: string | null;
+          action: string;
+          entity: string;
+          message: string | null;
+          metadata: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          actor_user_id?: string | null;
+          target_user_id?: string | null;
+          action: string;
+          entity: string;
+          message?: string | null;
+          metadata?: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          actor_user_id?: string | null;
+          target_user_id?: string | null;
+          action?: string;
+          entity?: string;
+          message?: string | null;
+          metadata?: Json;
           created_at?: string;
         };
         Relationships: [];
